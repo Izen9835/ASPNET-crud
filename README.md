@@ -1,7 +1,7 @@
 # ASP.NET CRUD Demo Application
 
 ## Highly recommend [this C# Web Dev playlist](https://www.youtube.com/watch?v=m8IuIoAlciM&list=PLhPyEFL5u-i2ShGqmuP3uDdSy06hzBzdo) by Shad Sluiter
-clear explanations, eununciations, instructions
+this repo is 90% attributed to the help of the above course. it had clear explanations, eununciations, and instructions
 
  Active Server Pages Network Enabled Technologies (ASP.NET) web application  
  Create, Read, Update, Delete (CRUD) (in relation to SQL database)  
@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[MockStores] (
 This script was created using the SQL table editor in Visual Studio 2022, but you can just copy paste the above code.
 Use [Mockaroo](https://www.mockaroo.com) to create mock data based on above table format.
 
-### 2. Configure Data Access Objects (DAO) (in [services folder](https://github.com/Izen9835/ASPNET-crud/tree/master/Services))
+### 2. Configure Data Access Object (DAO) (in [services folder](https://github.com/Izen9835/ASPNET-crud/tree/master/Services))
 ```C#
 namespace SB_Onboarding_1.Services
 {
