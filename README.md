@@ -82,8 +82,11 @@ public IActionResult ProcessDelete(int id)
 ```
 The controller essentially calls the DAO methods, and finally calls the View model to render the desired screen
 
-
-## Highly recommend [this C# Web Dev playlist](https://www.youtube.com/watch?v=m8IuIoAlciM&list=PLhPyEFL5u-i2ShGqmuP3uDdSy06hzBzdo) by Shad Sluiter
 ### 5. View (in [View/Store](https://github.com/Izen9835/ASPNET-crud/tree/master/Views/Store))
 Razor files (which essentially embed C# commands into html and css files), which were 95% created by Visual Studio shortcuts.  
-After configuring Controller, rightclick on methods that return ```IActionResult``` then press ```Add View```.
+After configuring Controller, rightclick on methods that return ```IActionResult``` then press ```Add View```.  
+
+
+
+## Highly recommend [this C# Web Dev playlist](https://www.youtube.com/watch?v=m8IuIoAlciM&list=PLhPyEFL5u-i2ShGqmuP3uDdSy06hzBzdo) by Shad Sluiter
+
