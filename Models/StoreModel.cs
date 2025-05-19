@@ -11,8 +11,7 @@ namespace SB_Onboarding_1.Models
         [DisplayName("Name")]
         [Required(ErrorMessage = "Name is required.")]
         [StringLength(5, ErrorMessage = "Name cannot exceed 100 characters.")]
-        [RegularExpression(@"^[A-Z].*", ErrorMessage = "Name must start with a capital letter.")]
-        [RegularExpression(@"^[A-Za-z0-9'\s]*$", ErrorMessage = "Name can only contain letters, numbers, apostrophes, and spaces.")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9'\s]*$")]
         public string Name { get; set; }
 
         [DisplayName("Location")]
