@@ -15,7 +15,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-// to use StoresDAO as a service in the controller???
+// for disabling client validation for debugging purposes
+// e.g. ensuring that server-side validation works
+builder.Services.AddRazorPages()
+    .AddViewOptions(options =>
+    {
+        options.HtmlHelperOptions.ClientValidationEnabled = true;
+    });
+
+// to use StoresDAO as a service in the controller (check StoreController.cs)
 builder.Services.AddScoped<IStoreDataService, StoresDAO>();
 
 var app = builder.Build();

@@ -83,8 +83,13 @@ namespace SB_Onboarding_1.Controllers
             return View();
         }
 
+
+        [HttpPost]
         public IActionResult ProcessCreate(StoreModel store)
         {
+            if (!ModelState.IsValid)
+                return View("CreateForm", store);
+
             _storesDAO.Insert(store);
             return View("Index", _storesDAO.GetAllStores());
         }
