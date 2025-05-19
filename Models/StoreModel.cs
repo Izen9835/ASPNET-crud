@@ -20,5 +20,8 @@ namespace SB_Onboarding_1.Models
 
         [DisplayName("Top Reviews")]
         public required string Description { get; set; }
+
+        // client side validation can be done here
+        // regular expression 
     }
 }

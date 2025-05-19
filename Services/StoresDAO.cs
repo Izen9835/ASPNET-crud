@@ -1,12 +1,20 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Storage;
 using SB_Onboarding_1.Models;
 
 namespace SB_Onboarding_1.Services
 {
     public class StoresDAO : IStoreDataService
     {
-        readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private string connectionString;
         private SqlConnection? _connection;
+        //connection string don't put in the code, put in appsettings.json
+
+        // constructor
+        public StoresDAO(IConfiguration configuration)
+        {
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
 
         public List<StoreModel> GetAllStores()
         {
@@ -161,7 +169,8 @@ namespace SB_Onboarding_1.Services
         {
             int newIDNum = -1;
             string sqlStatement = "UPDATE dbo.MockStores SET Name = @Name, Address = @Address, Revenue = @Revenue, Description = @Description WHERE Id = @Id";
-
+            // convert this into a stored procedure!
+            // add validation also
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
