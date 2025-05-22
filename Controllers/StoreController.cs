@@ -67,6 +67,13 @@ namespace SB_Onboarding_1.Controllers
         public IActionResult ProcessEdit(StoreModel store)
         {
             _storesDAO.Update(store);
+
+            Console.WriteLine(store.Id);
+            Console.WriteLine(store.Name);
+            Console.WriteLine(store.Address);
+            Console.WriteLine(store.Revenue);
+            Console.WriteLine(store.Description);
+
             return View("Index", _storesDAO.GetAllStores());
 
         }

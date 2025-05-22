@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Storage;
 using SB_Onboarding_1.Models;
+using System.Data;
 
 namespace SB_Onboarding_1.Services
 {
@@ -19,7 +20,7 @@ namespace SB_Onboarding_1.Services
         public List<StoreModel> GetAllStores()
         {
             List<StoreModel> foundStores = new List<StoreModel>();
-            string sqlStatement = "SELECT * FROM dbo.MockStores";
+            string sqlStatement = "SELECT * FROM MockStore.dbo.MockStores";
 
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
@@ -59,11 +60,12 @@ namespace SB_Onboarding_1.Services
         public StoreModel GetStoreById(int id)
         {
             StoreModel foundStore = null;
-            string sqlStatement = "SELECT * FROM dbo.MockStores WHERE Id = @Id";
+            string sqlStatement = "mockstoreSearchStoreByID";
 
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", id); 
 
                 try
@@ -97,12 +99,13 @@ namespace SB_Onboarding_1.Services
         public List<StoreModel> SearchStores(string searchTerm)
         {
             List<StoreModel> foundStores = new List<StoreModel>();
-            string sqlStatement = "SELECT * FROM dbo.MockStores WHERE Description LIKE @Name";
+            string sqlStatement = "mockstoreSearchDesc";
 
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
-                command.Parameters.AddWithValue("@Name", '%'+searchTerm+'%'); //wildcard %symbols make it so you can search within substrings also
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Desc", searchTerm); //wildcard %symbols make it so you can search within substrings also
 
                 try
                 {
@@ -138,10 +141,11 @@ namespace SB_Onboarding_1.Services
         {
             int commandOutput = -1;
             //insert at the beginning by default
-            string sqlStatement = "INSERT INTO dbo.MockStores VALUES (@Name, @Address, @Revenue, @Description)";
+            string sqlStatement = "mockstoreInsert";
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Name", store.Name);
                 command.Parameters.AddWithValue("@Address", store.Address);
                 command.Parameters.AddWithValue("@Revenue", store.Revenue);
@@ -168,12 +172,14 @@ namespace SB_Onboarding_1.Services
         public int Update(StoreModel store)
         {
             int newIDNum = -1;
-            string sqlStatement = "UPDATE dbo.MockStores SET Name = @Name, Address = @Address, Revenue = @Revenue, Description = @Description WHERE Id = @Id";
-            // convert this into a stored procedure!
-            // add validation also
+            string sqlStatement = "mockstoreUpdate";
+            //string sqlStatement = "UPDATE dbo.MockStores SET Name = @Name, Address = @Address, Revenue = @Revenue, Description = @Description WHERE Id = @Id";
+            // convert this into a stored procedure
+
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", store.Id);
                 command.Parameters.AddWithValue("@Name", store.Name);
                 command.Parameters.AddWithValue("@Address", store.Address);
@@ -200,11 +206,12 @@ namespace SB_Onboarding_1.Services
         public int Delete(StoreModel store)
         {
             int commandOutput = -1;
-            string sqlStatement = "DELETE FROM dbo.MockStores WHERE Id = @Id";
+            string sqlStatement = "mockstoreDelete";
 
             using (_connection = new SqlConnection { ConnectionString = connectionString })
             {
                 SqlCommand command = new SqlCommand(sqlStatement, _connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", store.Id);
 
 
